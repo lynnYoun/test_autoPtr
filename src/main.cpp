@@ -1,4 +1,6 @@
+#include <chrono>
 #include <iomanip>
+
 #include "app/Datagenerator.hpp"
 
 using namespace std;
@@ -11,6 +13,8 @@ int main()
 {
     try
     {
+        auto start = std::chrono::steady_clock::now();
+
         //>>>-------------------------------------------------------------------------------------------------------------------------------------
         //1 生成指定数量的FiducialMark和Pad对象,形状为矩形或圆形，并求出所有对象的总面积
         Board board;
@@ -23,11 +27,11 @@ int main()
         {
             // 打印出生成的被测对象名称及其面积
             cout << fixed << setprecision(2)    // 精确到小数点后两位
-                 << board.pMeasuredObjs().at(i)->name() << "\t"
-                 << "Area: " << board.pMeasuredObjs().at(i)->pShape()->calcArea()
+                 << board.MeasuredObjs().at(i)->name() << "\t"
+                 << "Area: " << board.MeasuredObjs().at(i)->pShape()->calcArea()
                  << endl;
             // 计算被测对象的总面积
-            totalArea += board.pMeasuredObjs().at(i)->pShape()->calcArea();
+            totalArea += board.MeasuredObjs().at(i)->pShape()->calcArea();
         }
         cout << "所有被测对象的总面积为：" << totalArea << endl;
 
@@ -37,14 +41,20 @@ int main()
         for (int i = 0; i < OBJ_CNT; ++i)
         {
             // 如果被测对象不在Board板子里面，打印出对象名
-            if(!board.pMeasuredObjs().at(i)->pShape()->contains(board.originX(),
+            if(!board.MeasuredObjs().at(i)->pShape()->contains(board.originX(),
                                                                  board.originY(),
                                                                  board.sizeX(),
                                                                  board.sizeY()))
             {
-                cout << board.pMeasuredObjs().at(i)->name() << endl;
+                cout << board.MeasuredObjs().at(i)->name() << endl;
             }
         }
+
+        auto end = std::chrono::steady_clock::now();
+        cout << endl << "使用share_ptr耗时：" <<
+                std::chrono::duration< double,milli>(end-start).count()
+             << "毫秒" << endl;
+
     }
     catch(const CustomException& ex )
     {

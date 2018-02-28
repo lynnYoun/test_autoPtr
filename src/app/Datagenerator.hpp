@@ -1,6 +1,7 @@
 #ifndef DATAGENERATOR_HPP
 #define DATAGENERATOR_HPP
 
+#include <memory>
 #include "job/Board.hpp"
 #include "sdk/NumRandom.hpp"
 

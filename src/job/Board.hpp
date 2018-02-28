@@ -1,6 +1,7 @@
 #ifndef BOARD_H
 #define BOARD_H
 
+#include <memory>
 #include <vector>
 
 #include "FiducialMark.hpp"
@@ -44,14 +45,16 @@ namespace Job
         double originY() { return this->m_originY; }
         void setOriginY(double originY) { this->m_originY =originY; }
 
-        std::vector<MeasuredObj *>& pMeasuredObjs() { return this->m_pMeasuredObjs; }
+        std::vector<std::shared_ptr<MeasuredObj>>& MeasuredObjs() { return this->m_MeasuredObjs; }
 
     private:
         double m_sizeX{0};                //基板宽度
         double m_sizeY{0};                //基板长度
         double m_originX{0};              //基板相对于机器原点的x坐标
         double m_originY{0};              //基板相对于机器原点的y坐标
-        std::vector<MeasuredObj *> m_pMeasuredObjs; // 被测对象指针
+        std::vector<std::shared_ptr<MeasuredObj>> m_MeasuredObjs; // 被测对象指针
+
+//        std::shared_ptr<MeasuredObj> pNumber(new int(1));
     };
 
 }//End of namespace Job

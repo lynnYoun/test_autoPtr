@@ -82,7 +82,7 @@ void DataGenerator::generateData(Board& board)
             }
             pMeasuredObj->setPShape(pShape);
             pMeasuredObj->setName(objName);
-            board.pMeasuredObjs().push_back(pMeasuredObj);
+            board.MeasuredObjs().emplace_back(auto_ptr<MeasuredObj>(pMeasuredObj));
         }
     }
     CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("数据生成失败！");
