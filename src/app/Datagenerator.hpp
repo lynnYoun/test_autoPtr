@@ -4,7 +4,7 @@
 #include "job/Board.hpp"
 #include "sdk/NumRandom.hpp"
 
-#define OBJ_CNT 10  // 被测对象总数量（这里包含基准点和焊盘）
+#define OBJ_CNT 1000000  // 被测对象总数量（这里包含基准点和焊盘）
 #define FIDUCIALMARK_CNT 2  // 基准点数量
 #define PAD_CNT (OBJ_CNT-FIDUCIALMARK_CNT)  // 焊盘数量
 
